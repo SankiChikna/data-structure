@@ -1,0 +1,74 @@
+#include <iostream>
+using namespace std;
+
+struct emp
+   {
+      int empno;
+      struct emp *next;
+   };
+typedef struct emp node;
+   node *head,*tail;
+
+void input(node *p)
+   {
+      cout<<"\nEnter empno:";
+      cin>>p->empno;
+      p->next=head;
+   }
+
+void myadd()
+   {
+      node *t;
+      t=new node;
+      input(t);
+      if(head==NULL)
+	{
+	  head=t;
+	  t->next=t;
+	  return;
+	}
+      else
+	{
+	  tail->next=t;
+	  tail=t;
+	  tail->next=head;
+	}
+   }
+
+void jos()
+   {
+      node *t,*p;
+      int n;
+      cout<<"\nEnter no of rotations";
+      cin>>n;
+      for(t=head;t->next!=t;t=t->next)
+	{
+	  for(int i=1;i<n-1;i++)
+	    t=t->next;
+	  p=t->next->next;
+	  delete t->next;
+	  t->next=p;
+	}
+      cout<<"\nWinner :"<<t->empno;
+   }
+
+int main()
+   {
+     node*x;
+     int n;
+     int ch;
+     while(1)
+	{
+	   cout<<"\n1.Add"
+	       <<"\n2.Joseph's Algorithm"
+	       <<"\n3.Exit"
+	       <<"\nEnter choice :";
+	   cin>>ch;
+	   switch(ch)
+	      {
+		 case 1:myadd();break;
+		 case 2:jos();break;
+		 case 3:exit(1);
+	      }
+	}
+   }

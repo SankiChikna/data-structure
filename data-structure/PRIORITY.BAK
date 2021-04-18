@@ -1,0 +1,188 @@
+#include <iostream>
+using namespace std;
+
+struct emp
+{
+    int empno;
+    char name[20];
+    char grade;
+    struct emp *next;
+    int sal;
+};
+typedef emp *node;
+node *head[5], *tail[5];
+
+void input(node *p)
+{
+    cout << "\nEnter empno name salary:";
+    cin >> p->empno >> p->name >> p->sal;
+loop:
+    cout << "\nEnter grade between a and e :";
+    cin>>p->grade; 
+    if (p->grade < 97 || p->grade > 101) goto loop;
+    p->next == NULL;
+}
+
+void myadd()
+{
+    int i;
+    node *t;
+    t = new node;
+    input(t)
+        i = t->grade - 97;
+    if (head[i] == NULL)
+        head[i] = t;
+    else
+        tail[i]->next = t;
+    tail[i] = t;
+}
+
+void print(node *p)
+{
+    cout << "\nEmp no :" << p->empno
+         << "\nName :" << p->name
+         << "\nSalary :" << p->sal
+         << "\nGrade :" << p->grade;
+}
+
+void mylist()
+{
+    node *t;
+    char i;
+    int a;
+loop:
+    cout << "\nEnter grade between a and e :" if (p->grade < 97 || p->grade > 101) goto loop;
+    a = i - 97;
+    if (head[i] == NULL)
+    {
+        cout << "\nEmpty";
+        return;
+    }
+    for (t = head[a]; t != NULL; t = t->next)
+        print(t);
+}
+
+void mydel()
+{
+    int bulb = 0;
+loop:
+    cout << "\nEnter grade between a and e :" if (p->grade < 97 || p->grade > 101) goto loop;
+    a = i - 97;
+    if (head[a] == NULL)
+        cout << "\nEnter record to delete :";
+    cin >> i;
+    if (head[a]->empno == i)
+    {
+        t = head[a]->next;
+        delete head[a];
+        head[a] = t;
+        cout << "\nOne record deleted";
+        return
+    }
+    for (t = head[a]; t->next != NULL; t = t - next)
+    {
+        if (t->next->empno == i)
+        {
+            p = t->next->next;
+            delete t - nextl
+            t->next = p;
+            if (t->next == NULL)
+                tail[a] = t;
+            cout << "\nOne record deleted ";
+            bulb = 1 break;
+        }
+    }
+    if (bulb == 0)
+        cout << "\nRecord not found";
+}
+
+void myins(node *t, int a)
+{
+    node *n;
+    n = new node;
+    input(n);
+    n->next = t->next;
+    t->next = n;
+    if (n->next == NULL)
+        tail[a] = n;
+}
+
+void insert()
+{
+    node *t, *p, *m;
+    char n;
+    int i, j, bulb = 0, a;
+loop:
+    cout << "\nEnter grade between a and e :" if (p->grade < 97 || p->grade > 101) goto loop;
+    a = i - 97;
+    cout << "\nEnter a no to find :";
+    cin >> i;
+    if (i == head[a]->empno)
+    {
+        cout << "\n1.Before"
+             << "\n2.After";
+        cin >> j;
+        if (j == 1)
+        {
+            t = new node;
+            input(t);
+            t->next = head[a];
+            head[a] = t;
+        }
+        else
+            myins(head, a);
+    }
+    for (m = head[a]; m->next != NULL; m = m->next)
+    {
+        if (m->next->empno == i)
+        {
+            cout << "\n1.Before"
+                 << "\n2.After";
+            cin >> j;
+            if (j == 1)
+                myins(m, a);
+            else
+                myins(m->next, a);
+            bulb = 1;
+            cout << "\nOne record deleted";
+            break;
+        }
+    }
+    if (bulb == 0)
+        cout << "\nRecord not found";
+}
+
+int main()
+{
+    int n;
+    int ch;
+    cout << "\nHow many elements";
+    cin>>n;
+    while (1)
+    {
+        cout << "\n1.Add"
+             << "\n2.List"
+             << "\n3.Delete"
+             << "\n4.Insert"
+             << "\n4.Exit"
+             << "\nEnter choice :";
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+            myadd();
+            break;
+        case 2:
+            mylist();
+            break;
+        case 3:
+            mydel();
+            break;
+        case 4:
+            insert();
+            break;
+        case 5:
+            exit(1);
+        }
+    }
+}
