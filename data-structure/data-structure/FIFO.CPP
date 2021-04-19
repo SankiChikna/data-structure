@@ -1,0 +1,65 @@
+#include <iostream>
+using namespace std;
+
+int a[5], i = -1;
+
+void myadd()
+{
+	if (i == 4)
+	{
+		cout << "\nStock is full";
+		return;
+	}
+	cout << "\nEnter data";
+	cin >> a[++i];
+}
+void mylist()
+{
+	if (i == -1)
+	{
+		cout << "\nStock is empty";
+		return;
+	}
+	cout << "\nData in stock LIFO :";
+	for (int j = 0; j <= i; j++)
+		cout << " " << a[j] << " ";
+}
+void mydel()
+{
+	if (i == -1)
+	{
+		cout << "\nStock is empty";
+		return;
+	}
+	for (int p = 0; p < i; p++)
+		a[p] = a[p + 1];
+	i--;
+	cout << "\nElement deleted ";
+}
+int main()
+{
+	int ch;
+	while (1)
+	{
+		cout << "\n1.Add"
+			 << "\n2.List"
+			 << "\n3.Del"
+			 << "\n4.Exit"
+			 << "\nEnter choice :";
+		cin >> ch;
+		switch (ch)
+		{
+		case 1:
+			myadd();
+			break;
+		case 2:
+			mylist();
+			break;
+		case 3:
+			mydel();
+			break;
+		case 4:
+			exit(1);
+		}
+	}
+}

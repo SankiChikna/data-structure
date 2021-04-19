@@ -1,0 +1,119 @@
+#include <iostream>
+using namespace std;
+
+struct emp
+{
+    struct emp *prev;
+    int eno;
+    struct emp *next;
+};
+typedef struct emp node;
+node *head, *tail;
+
+void myadd()
+{
+    node *t;
+    t = new node;
+    cout << "\nEnter empno :";
+    cin >> t->eno;
+    if (head == NULL)
+    {
+        head = t;
+        t->next = NULL;
+        t->prev = NULL;
+    }
+    else
+    {
+        tail->next = t;
+        t->prev = tail;
+        t->next = head;
+    }
+    tail = t;
+}
+
+void mylist()
+{
+    if (head == NULL)
+    {
+        cout << "\nList is empty";
+        return;
+    }
+    node *t;
+    cout << "\nFront list";
+    //for (t = head; t != NULL; t = t->next)
+    //    cout << " " << t->eno;
+    for (t = tail; t != NULL; t = t->prev)
+        cout << " " << t->eno;
+}
+
+void mydel()
+{
+    if (head == NULL)
+    {
+        cout << "\nList is empty";
+        return;
+    }
+    int find, bulb = 0;
+    node *t, *p;
+    cout << "\nEnter a empno to delete :";
+    cin >> find;
+    if (head->eno == find)
+    {
+        t = head->next;
+        delete head;
+        head = t;
+        head->prev = NULL;
+        return;
+    }
+    for (t = head; t != NULL; t = t->next)
+    {
+        if (t->next->eno == find)
+        {
+            p = t->next;
+            t=p;
+            t->next->prev=p;
+            delete t;
+            bulb == 1;
+            break;
+        }
+        if (t->next == NULL)
+        {
+            p = tail->prev;
+            delete tail;
+            tail = p;
+            tail->next = NULL;
+        }
+    }
+    if (bulb == 0)
+        cout << "\nRecord not found";
+}
+
+int main()
+{
+    node *x;
+    int n;
+    int ch;
+    while (1)
+    {
+        cout << "\n1.Add"
+             << "\n2.List"
+             << "\n3.Delete"
+             << "\n4.Exit"
+             << "\nEnter choice :";
+        cin >> ch;
+        switch (ch)
+        {
+        case 1:
+            myadd();
+            break;
+        case 2:
+            mylist();
+            break;
+        case 3:
+            mydel();
+            break;
+        case 4:
+            exit(1);
+        }
+    }
+}
